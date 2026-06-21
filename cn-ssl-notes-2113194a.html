@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>说球帝 · 信息卡片介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #eff1f3;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      padding: 2.5rem 1.25rem;
+      color: #1e2022;
+    }
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* 主视觉 Hero */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e6e9ed;
+      text-align: center;
+    }
+    .hero-card h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #111315;
+      margin-bottom: 0.75rem;
+    }
+    .hero-card .hero-badge {
+      display: inline-block;
+      background: #eef2f5;
+      color: #2d3e50;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #d4dbe2;
+      margin-bottom: 1rem;
+    }
+    .hero-card p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #3a414a;
+    }
+
+    /* 卡片网格 */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .info-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.75rem 1.75rem 2rem 1.75rem;
+      border: 1px solid #e1e5ea;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.15s;
+    }
+    .info-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+    .info-card .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+      display: inline-block;
+      background: #f2f5f8;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 14px;
+      color: #1f2a36;
+    }
+    .info-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0.5rem 0 0.6rem 0;
+      color: #1a1d21;
+    }
+    .info-card p {
+      font-size: 0.95rem;
+      color: #3d454f;
+      margin-bottom: 0.4rem;
+    }
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.4rem;
+    }
+    .info-card li {
+      font-size: 0.95rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px dashed #edf0f3;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .info-card li::before {
+      content: "·";
+      color: #5b6e7e;
+      font-weight: 700;
+      display: inline-block;
+      width: 1rem;
+    }
+
+    /* 适合人群卡片 (全宽) */
+    .full-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.75rem 2rem 2rem 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e1e5ea;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+    }
+    .full-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .full-card .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+    }
+    .full-card .tag {
+      background: #f2f5f9;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #1f2a36;
+      border: 1px solid #dde3ea;
+    }
+
+    /* 可信说明 + 自然链接段落 */
+    .trust-section {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.75rem 2rem;
+      border: 1px solid #e1e5ea;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      margin-bottom: 2rem;
+    }
+    .trust-section p {
+      font-size: 0.98rem;
+      color: #2c353f;
+      margin-bottom: 0.65rem;
+    }
+    .trust-section a {
+      color: #1f4973;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #bcc9d6;
+      transition: border-color 0.1s;
+    }
+    .trust-section a:hover {
+      border-bottom-color: #1f4973;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .faq-mini .q-item {
+      background: #f7f9fc;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #e2e8ef;
+      font-size: 0.92rem;
+      color: #28323d;
+    }
+    .faq-mini .q-item strong {
+      font-weight: 600;
+      color: #12171d;
+      margin-right: 0.5rem;
+    }
+
+    /* 底部 */
+    .footer-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #77828f;
+      border-top: 1px solid #d6dce3;
+      padding-top: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 700px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+      .hero-card {
+        padding: 2rem 1.2rem;
+      }
+      .hero-card h1 {
+        font-size: 2rem;
+      }
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .full-card, .trust-section {
+        padding: 1.2rem 1.2rem;
+      }
+      .info-card {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- Hero 主视觉 -->
+  <div class="hero-card">
+    <div class="hero-badge">站点索引 · 信息卡片</div>
+    <h1>说球帝</h1>
+    <p>聚合赛事信息与数据动态，为关注篮球、足球及综合体育的用户提供结构化的内容参考。本页为基于公开信息的说明性介绍。</p>
+  </div>
+
+  <!-- 双列卡片：用途 + 特点 -->
+  <div class="grid-2col">
+    <!-- 用途卡片 -->
+    <div class="info-card">
+      <div class="card-icon">📋</div>
+      <h3>主要用途</h3>
+      <p>覆盖热门联赛与杯赛，提供比分、赛程、积分榜以及球队数据。适合快速查阅比赛走势与统计概况。</p>
+      <ul>
+        <li>实时比分与赛程更新</li>
+        <li>联赛积分、射手榜、助攻榜</li>
+        <li>球队阵容及历史交锋记录</li>
+        <li>新闻简报与赛事前瞻</li>
+      </ul>
+    </div>
+
+    <!-- 特点卡片 -->
+    <div class="info-card">
+      <div class="card-icon">⚙️</div>
+      <h3>界面与体验</h3>
+      <p>采用信息分级布局，降低浏览负荷。适配移动端与桌面端，赛事数据以表格及卡片形式呈现。</p>
+      <ul>
+        <li>轻量化导航与筛选</li>
+        <li>深色/浅色主题跟随</li>
+        <li>多联赛收藏与提醒</li>
+        <li>数据更新延迟较低</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 适合人群 (全宽卡片) -->
+  <div class="full-card">
+    <h3>👥 适合人群</h3>
+    <div class="tag-group">
+      <span class="tag">日常观赛球迷</span>
+      <span class="tag">数据型爱好者</span>
+      <span class="tag">竞彩分析参考</span>
+      <span class="tag">体育媒体从业者</span>
+      <span class="tag">球队跟队关注者</span>
+      <span class="tag">大学生体育社群</span>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.95rem; color: #38414c;">无论你主要关注五大联赛、NBA、CBA 还是欧冠、亚冠，均可通过个性化筛选聚焦自己感兴趣的赛事。</p>
+  </div>
+
+  <!-- 可信说明 + 自然链接段落 -->
+  <div class="trust-section">
+    <h3 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; display: flex; gap: 0.3rem;">🔗 站点说明</h3>
+    <p>「说球帝」定位于体育信息聚合，数据来源包括公开接口与授权数据商，力求在时效与准确之间取得平衡。平台本身不提供任何博彩或非法投注服务，所有内容仅供体育爱好者参考。</p>
+    <p>如果你正在寻找一个覆盖多联赛、界面直观的体育数据站，可以体验一下 <a href="https://cn-ssl-shuoqiudi.com">说球帝</a>，了解其实际的数据组织方式与交互逻辑。用户反馈与社区讨论有助于持续改善信息呈现质量。</p>
+    <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #5d6977;">建议使用前阅读站内隐私声明与免责条款，合理规划使用时间。</p>
+
+    <!-- FAQ 摘要 (内嵌) -->
+    <div style="margin-top: 1.5rem;">
+      <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 0.6rem; color: #1b232c;">常见疑问摘要</h4>
+      <div class="faq-mini">
+        <div class="q-item"><strong>数据更新频率？</strong> 比分与赛程为实时更新，统计类数据每日同步。</div>
+        <div class="q-item"><strong>是否需要注册？</strong> 基础浏览无需注册，部分个性化功能需创建账号。</div>
+        <div class="q-item"><strong>是否提供历史数据？</strong> 支持查询近数个赛季的联赛记录与球队数据。</div>
+        <div class="q-item"><strong>移动端适配情况？</strong> 已适配主流手机浏览器，部分功能建议使用横屏。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    介绍页内容基于公开信息整理 · 仅供参考
+  </div>
+
+</div>
+</body>
+</html>
